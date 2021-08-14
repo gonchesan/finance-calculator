@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+
+import { DataContext } from "../contexts/DataContext";
 
 const Modal = () => {
+  const [inputToAdd, setInputToAdd] = useState("");
+  const { inputFields, setInputFields } = useContext(DataContext);
+
+  const handleInputToAdd = (event) => {
+    event.preventDefault();
+    setInputToAdd(event.target.value);
+  };
+
+  const handleAddField = () => {
+    setInputFields([...inputFields, { name: inputToAdd, valueNumber: 0 }]);
+    setInputToAdd("");
+  };
+
   return (
     <div
       className="modal fade"
       id="exampleModal"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
@@ -23,14 +38,20 @@ const Modal = () => {
             ></button>
           </div>
           <div className="modal-body">
-            <form>
+            <form onSubmit={(event) => event.preventDefault()}>
               <div className="mb-3">
-                <label for="entry-name" className="col-form-label">
+                <label htmlFor="entry-name" className="col-form-label">
                   Nombre de Entrada:
                 </label>
-                <input type="text" className="form-control" id="entry-name" />
+                <input
+                  type="text"
+                  value={inputToAdd}
+                  className="form-control"
+                  id="entry-name"
+                  onChange={handleInputToAdd}
+                />
               </div>
-              <div className="mb-3">
+              {/* <div className="mb-3">
                 <label for="row-type" className="col-form-label">
                   Nombre de fila:
                 </label>
@@ -43,7 +64,7 @@ const Modal = () => {
                   <option value="2">Propios (Sam)</option>
                   <option value="3">Tarjetas</option>
                 </select>
-              </div>
+              </div> */}
             </form>
           </div>
           <div className="modal-footer">
@@ -54,7 +75,12 @@ const Modal = () => {
             >
               Cancelar
             </button>
-            <button type="button" className="btn btn-primary">
+            <button
+              type="button"
+              className="btn btn-primary"
+              disabled={inputToAdd.length === 0}
+              onClick={handleAddField}
+            >
               Agregar entrada
             </button>
           </div>

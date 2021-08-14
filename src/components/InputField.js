@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 
-function InputField({ label }) {
+import { DataContext } from "../contexts/DataContext";
+
+function InputField({ inputName, inputValue, handleInput, getIndex }) {
+  const { deleteField } = useContext(DataContext);
+
   return (
     <div className="col-md">
       <div className="form-floating">
-        <input type="number" className="form-control" />
-        <label>{label}</label>
+        <input
+          name="valueNumber"
+          type="number"
+          onChange={handleInput}
+          value={inputValue}
+          className="form-control input-to-calculate"
+        />
+        <label>{inputName}</label>
+        <button
+          className="btn btn-warning btn-sm"
+          data-bs-toggle="modal"
+          data-bs-target="#ModalEdit"
+          onClick={getIndex}
+        >
+          ❕
+        </button>
+        <button
+          className="btn btn-outline-danger btn-sm"
+          onClick={() => deleteField(inputName)}
+        >
+          ❌
+        </button>
       </div>
     </div>
   );
