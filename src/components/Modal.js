@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import { DataContext } from "../contexts/DataContext";
+import { DataContext } from "../global-context/DataContext";
 
 const Modal = () => {
   const [inputToAdd, setInputToAdd] = useState("");
@@ -12,7 +12,7 @@ const Modal = () => {
   };
 
   const handleAddField = () => {
-    setInputFields([...inputFields, { name: inputToAdd, valueNumber: 0 }]);
+    setInputFields([...inputFields, { name: inputToAdd, valueNumber: null }]);
     setInputToAdd("");
   };
 

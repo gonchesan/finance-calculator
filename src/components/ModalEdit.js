@@ -1,28 +1,22 @@
 import React, { useContext } from "react";
 
-import { DataContext } from "../contexts/DataContext";
+import { DataContext } from "../global-context/DataContext";
 
 const ModalEdit = () => {
-  const {
-    inputToEdit,
-    setInputToEdit,
-    index,
-    setIndex,
-    inputFields,
-    setInputFields,
-  } = useContext(DataContext);
+  const { inputToEdit, setInputToEdit, inputFields, setInputFields } =
+    useContext(DataContext);
 
   const handleInputToEdit = (event) => {
     event.preventDefault();
-    setInputToEdit(event.target.value);
+    setInputToEdit({ ...inputToEdit, name: event.target.value });
   };
 
   const submitEdit = () => {
-    //Todo todos los campos, el id que fue clickeado, el nombre y setear el nuevo nombre.
     const values = [...inputFields];
-    values[index].name = inputToEdit;
+    const newIndex = parseInt(inputToEdit.id - 1);
+    values[newIndex].name = inputToEdit.name;
     setInputFields(values);
-    setIndex();
+    setInputToEdit({ id: null, name: "" });
   };
 
   return (
@@ -47,33 +41,19 @@ const ModalEdit = () => {
             ></button>
           </div>
           <div className="modal-body">
-            <form onChange={(event) => event.preventDefault()}>
+            <form onSubmit={(event) => event.preventDefault()}>
               <div className="mb-3">
                 <label htmlFor="entry-name-editing" className="col-form-label">
                   Nombre de Entrada:
                 </label>
                 <input
                   type="text"
-                  value={inputToEdit}
+                  value={inputToEdit.name}
                   className="form-control"
                   id="entry-name-editing"
                   onChange={handleInputToEdit}
                 />
               </div>
-              {/* <div className="mb-3">
-                  <label for="row-type" className="col-form-label">
-                    Nombre de fila:
-                  </label>
-                  <select
-                    className="form-select"
-                    id="row-type"
-                    aria-label="Default select example"
-                  >
-                    <option value="1">Propios (Gaston)</option>
-                    <option value="2">Propios (Sam)</option>
-                    <option value="3">Tarjetas</option>
-                  </select>
-                </div> */}
             </form>
           </div>
           <div className="modal-footer">
@@ -88,7 +68,7 @@ const ModalEdit = () => {
               type="button"
               className="btn btn-primary"
               disabled={inputToEdit.length === 0}
-              onClick={() => submitEdit(inputToEdit)}
+              onClick={() => submitEdit()}
             >
               Editar entrada
             </button>

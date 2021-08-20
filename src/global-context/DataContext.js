@@ -1,20 +1,23 @@
 import { useState, createContext } from "react";
 
+import { DataField } from "../components/DataField";
+
 export const DataContext = createContext({});
 
 const DataContextProvider = (props) => {
-  const [inputFields, setInputFields] = useState([
-    { name: "Campo 1", valueNumber: 123.56 },
-    { name: "Campo 2", valueNumber: -72 },
-  ]);
-  const [total, setTotal] = useState();
+  const [inputFields, setInputFields] = useState(DataField);
+  // const [total, setTotal] = useState();
+  const [total, setTotal] = useState({
+    totalPropios: null,
+    totalTarjetas: null,
+    totalTerceros: null,
+  });
   const [editStatus, setEditStatus] = useState(false);
-  const [inputToEdit, setInputToEdit] = useState("");
-  const [index, setIndex] = useState();
+  const [inputToEdit, setInputToEdit] = useState({ id: null, name: "" });
 
-  const deleteField = (nameInput) => {
+  const deleteField = (index) => {
     const updatedFields = [...inputFields].filter(
-      (field) => field.name !== nameInput
+      (field) => field.id !== index
     );
     setInputFields(updatedFields);
   };
@@ -31,8 +34,6 @@ const DataContextProvider = (props) => {
         setEditStatus,
         inputToEdit,
         setInputToEdit,
-        index,
-        setIndex,
       }}
     >
       {props.children}

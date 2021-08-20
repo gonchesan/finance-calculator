@@ -1,14 +1,32 @@
 import React, { useContext } from "react";
 
-import { DataContext } from "../contexts/DataContext";
+import { DataContext } from "../global-context/DataContext";
 
 const Footer = () => {
   const { setTotal, inputFields } = useContext(DataContext);
 
   const calculateTotal = () => {
-    let allNumbers = inputFields.map((field) => field.valueNumber);
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    setTotal(allNumbers.reduce(reducer));
+    const rowPropiosNumbers = inputFields
+      .filter((fields) => fields.row === "propios")
+      .map((filteredObj) => filteredObj.valueNumber);
+    const rowTarjetasNumbers = inputFields
+      .filter((fields) => fields.row === "tarjetas")
+      .map((filteredObj) => filteredObj.valueNumber);
+    const rowTercerosNumbers = inputFields
+      .filter((fields) => fields.row === "terceros")
+      .map((filteredObj) => filteredObj.valueNumber);
+
+    const totalPropios = rowPropiosNumbers.reduce((a, b) => a + b);
+    const totalTarjetas = rowTarjetasNumbers.reduce((a, b) => a + b);
+
+    //TODO Mas adelante agregarlo
+    // const totalTerceros = rowTercerosNumbers.reduce((a, b) => a + b);
+
+    setTotal({
+      totalPropios,
+      totalTarjetas,
+      totalTerceros: null,
+    });
   };
 
   return (

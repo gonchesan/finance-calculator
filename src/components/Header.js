@@ -1,7 +1,7 @@
 import React from "react";
 
 const Header = () => {
-  const date = new Date().toLocaleDateString(); // 8/19/2020
+  const date = new Date().toLocaleDateString();
 
   return (
     <div className="card-header">

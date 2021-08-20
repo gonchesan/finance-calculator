@@ -5,10 +5,31 @@ import Modal from "./components/Modal";
 import ModalEdit from "./components/ModalEdit";
 import RowFields from "./components/RowFields";
 
-import { DataContext } from "./contexts/DataContext";
+import { DataContext } from "./global-context/DataContext";
 
 function App() {
-  const { fields, setEditStatus } = useContext(DataContext);
+  const { inputFields, setEditStatus, setInputFields, setInputToEdit, total } =
+    useContext(DataContext);
+
+  const propiosFields = inputFields.filter(
+    (inputs) => inputs.row === "propios"
+  );
+  const tarjetasFields = inputFields.filter(
+    (inputs) => inputs.row === "tarjetas"
+  );
+
+  const handleChangeInput = (event) => {
+    const values = [...inputFields];
+    const newIndex = event.target.id - 1;
+    values[newIndex][event.target.name] = parseFloat(event.target.value);
+    setInputFields(values);
+  };
+
+  const getIndex = (id) => {
+    const values = [...inputFields];
+    const newIndex = parseInt(id - 1);
+    setInputToEdit({ id, name: values[newIndex].name });
+  };
 
   return (
     <div className="container justify-content-center align-content-center">
@@ -27,7 +48,20 @@ function App() {
             </button>
             <Modal />
             <ModalEdit />
-            <RowFields fields={fields} />
+            <RowFields
+              getIndex={getIndex}
+              handleChangeInput={handleChangeInput}
+              inputFields={propiosFields}
+              total={total.totalPropios}
+            />
+            <hr />
+            <h5 className="d-inline">Tarjetas</h5>
+            <RowFields
+              getIndex={getIndex}
+              handleChangeInput={handleChangeInput}
+              inputFields={tarjetasFields}
+              total={total.totalTarjetas}
+            />
             <hr />
           </div>
 

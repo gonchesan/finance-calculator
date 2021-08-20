@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 
-import { DataContext } from "../contexts/DataContext";
+import { DataContext } from "../global-context/DataContext";
 
-function InputField({ inputName, inputValue, handleInput, getIndex }) {
+function InputField({ id, inputName, inputValue, handleInput, getIndex }) {
   const { deleteField } = useContext(DataContext);
 
   return (
     <div className="col-md">
       <div className="form-floating">
         <input
+          id={id}
           name="valueNumber"
           type="number"
           onChange={handleInput}
@@ -26,7 +27,7 @@ function InputField({ inputName, inputValue, handleInput, getIndex }) {
         </button>
         <button
           className="btn btn-outline-danger btn-sm"
-          onClick={() => deleteField(inputName)}
+          onClick={() => deleteField(id)}
         >
           ❌
         </button>
