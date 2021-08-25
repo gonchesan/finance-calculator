@@ -19,13 +19,12 @@ const Footer = () => {
     const totalPropios = rowPropiosNumbers.reduce((a, b) => a + b);
     const totalTarjetas = rowTarjetasNumbers.reduce((a, b) => a + b);
 
-    //TODO Mas adelante agregarlo
-    // const totalTerceros = rowTercerosNumbers.reduce((a, b) => a + b);
+    const totalTerceros = rowTercerosNumbers.reduce((a, b) => a + b);
 
     setTotal({
       totalPropios,
       totalTarjetas,
-      totalTerceros: null,
+      totalTerceros,
     });
   };
 

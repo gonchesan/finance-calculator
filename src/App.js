@@ -17,6 +17,9 @@ function App() {
   const tarjetasFields = inputFields.filter(
     (inputs) => inputs.row === "tarjetas"
   );
+  const tercerosFields = inputFields.filter(
+    (inputs) => inputs.row === "terceros"
+  );
 
   const handleChangeInput = (event) => {
     const values = [...inputFields];
@@ -63,10 +66,15 @@ function App() {
               total={total.totalTarjetas}
             />
             <hr />
+            <h5 className="d-inline">Terceros</h5>
+            <RowFields
+              getIndex={getIndex}
+              handleChangeInput={handleChangeInput}
+              inputFields={tercerosFields}
+              total={total.totalTerceros}
+            />
+            <hr />
           </div>
-
-          {/*//! Agregar/quitar campo--Editar campo. Sumar()
-                //! seccion moto especial: seleccionar(agregar+monto+detalle?)  */}
 
           <Footer />
         </div>

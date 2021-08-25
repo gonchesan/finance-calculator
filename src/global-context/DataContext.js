@@ -6,7 +6,6 @@ export const DataContext = createContext({});
 
 const DataContextProvider = (props) => {
   const [inputFields, setInputFields] = useState(DataField);
-  // const [total, setTotal] = useState();
   const [total, setTotal] = useState({
     totalPropios: null,
     totalTarjetas: null,

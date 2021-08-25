@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import InputTotal from "./InputTotal";
 
-import { DataContext } from "../global-context/DataContext";
 import InputField from "./InputField";
 
 const RowFields = ({ inputFields, handleChangeInput, getIndex, total }) => {
-  // const { total } = useContext(DataContext);
-
   return (
     <div className="row g-4">
       {inputFields.map((field) => (
