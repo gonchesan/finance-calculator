@@ -3,7 +3,6 @@ import React, { useState, useContext } from "react";
 import { DataContext } from "../global-context/DataContext";
 
 const Modal = () => {
-  // const [inputToAdd, setInputToAdd] = useState("");
   const [inputToAdd, setInputToAdd] = useState({
     id: undefined,
     name: "",
@@ -31,7 +30,7 @@ const Modal = () => {
   const submitAddField = () => {
     inputToAdd.id = inputFields.length + 1;
     checkbox === true
-      ? (inputToAdd.total = "bruto")
+      ? (inputToAdd.total = "neto")
       : (inputToAdd.total = "disponible");
 
     if (inputToAdd.row === "") {
@@ -111,7 +110,7 @@ const Modal = () => {
                   onChange={() => setCheckbox(!checkbox)}
                 />
                 <label className="form-check-label" htmlFor="flexCheckChecked">
-                  Total Bruto
+                  Total Neto
                 </label>
               </div>
             </form>

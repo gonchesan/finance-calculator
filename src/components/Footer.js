@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { DataContext } from "../global-context/DataContext";
 
 const Footer = () => {
-  const { setTotal, inputFields } = useContext(DataContext);
+  const { setTotal, inputFields, totalMotos } = useContext(DataContext);
 
   const calculateTotal = () => {
     const rowPropiosNumbers = inputFields
@@ -15,16 +15,36 @@ const Footer = () => {
     const rowTercerosNumbers = inputFields
       .filter((fields) => fields.row === "terceros")
       .map((filteredObj) => filteredObj.valueNumber);
+    const rowEfectivoNumbers = inputFields
+      .filter((fields) => fields.row === "efectivo")
+      .map((filteredObj) => filteredObj.valueNumber);
 
     const totalPropios = rowPropiosNumbers.reduce((a, b) => a + b);
     const totalTarjetas = rowTarjetasNumbers.reduce((a, b) => a + b);
-
     const totalTerceros = rowTercerosNumbers.reduce((a, b) => a + b);
+    const totalEfectivo =
+      rowEfectivoNumbers[0] + rowEfectivoNumbers[1] * rowEfectivoNumbers[2];
+
+    const debo = inputFields.find((field) => field.id === 17);
+    const mercadoLibreTotal = inputFields.find((field) => field.id === 18);
+
+    const totalDisponible =
+      totalPropios +
+      totalTarjetas +
+      totalTerceros +
+      totalEfectivo -
+      debo.valueNumber;
+
+    const totalNeto =
+      totalDisponible + mercadoLibreTotal.valueNumber + totalMotos;
 
     setTotal({
       totalPropios,
       totalTarjetas,
       totalTerceros,
+      totalEfectivo,
+      totalDisponible,
+      totalNeto,
     });
   };
 

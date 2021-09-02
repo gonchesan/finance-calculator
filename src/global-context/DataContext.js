@@ -10,9 +10,14 @@ const DataContextProvider = (props) => {
     totalPropios: null,
     totalTarjetas: null,
     totalTerceros: null,
+    totalEfectivo: null,
+    totalDisponible: null,
+    totalNeto: null,
   });
   const [editStatus, setEditStatus] = useState(false);
   const [inputToEdit, setInputToEdit] = useState({ id: null, name: "" });
+  const [motos, setMotos] = useState([]);
+  const [totalMotos, setTotalMotos] = useState([]);
 
   const deleteField = (index) => {
     const updatedFields = [...inputFields].filter(
@@ -33,6 +38,10 @@ const DataContextProvider = (props) => {
         setEditStatus,
         inputToEdit,
         setInputToEdit,
+        motos,
+        setMotos,
+        totalMotos,
+        setTotalMotos,
       }}
     >
       {props.children}

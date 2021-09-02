@@ -62,9 +62,75 @@ export const DataField = [
     row: "tarjetas",
     total: "disponible",
   },
+  {
+    id: 10,
+    name: "E. Banorte",
+    valueNumber: 136,
+    row: "terceros",
+    total: "disponible",
+  },
+  {
+    id: 11,
+    name: "TG. Banorte",
+    valueNumber: 136,
+    row: "terceros",
+    total: "disponible",
+  },
+  {
+    id: 12,
+    name: "TG. Banamex",
+    valueNumber: 136,
+    row: "terceros",
+    total: "disponible",
+  },
+  {
+    id: 13,
+    name: "Cash",
+    valueNumber: 136,
+    row: "efectivo",
+    total: "disponible",
+  },
+  {
+    id: 14,
+    name: "USD",
+    valueNumber: 136,
+    row: "efectivo",
+    total: "disponible",
+  },
+  {
+    id: 15,
+    name: "Cambio",
+    valueNumber: 1,
+    row: "efectivo",
+    total: "disponible",
+  },
+  {
+    id: 16,
+    name: "Prestamo",
+    valueNumber: 136,
+    row: "otros",
+    total: "bruto",
+  },
+  {
+    id: 17,
+    name: "Debo",
+    valueNumber: 136,
+    row: "otros",
+    total: "disponible",
+  },
+  {
+    id: 18,
+    name: "ML",
+    valueNumber: 136,
+    row: "llanero",
+    total: "bruto",
+  },
 ];
 
 //? Row
 //Propios
 //Tarjetas
 //Terceros
+//Efectivo
+//Otros
+//Llanero
